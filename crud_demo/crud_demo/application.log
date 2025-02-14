@@ -1,0 +1,77 @@
+25-02-10 23:11:21.72 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener -
+				Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+25-02-10 23:11:21.73 [Thread-59] INFO  o.s.b.w.e.tomcat.GracefulShutdown -
+				Commencing graceful shutdown. Waiting for active requests to complete
+25-02-10 23:11:21.73 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol -
+				Pausing ProtocolHandler ["http-nio-8080"]
+25-02-10 23:11:22.37 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown -
+				Graceful shutdown complete
+25-02-10 23:11:22.38 [Thread-59] INFO  o.a.coyote.http11.Http11NioProtocol -
+				Stopping ProtocolHandler ["http-nio-8080"]
+25-02-10 23:11:22.38 [Thread-59] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+				Closing JPA EntityManagerFactory for persistence unit 'default'
+25-02-10 23:11:22.38 [Thread-59] INFO  com.zaxxer.hikari.HikariDataSource -
+				HikariPool-16 - Shutdown initiated...
+25-02-10 23:11:22.51 [Thread-59] INFO  com.zaxxer.hikari.HikariDataSource -
+				HikariPool-16 - Shutdown completed.
+25-02-10 23:11:22.82 [restartedMain] INFO  c.c.e.c.controller.StudentController -
+				I am inside main method
+25-02-10 23:11:22.89 [restartedMain] INFO  c.c.e.crud_demo.CrudDemoApplication -
+				Starting CrudDemoApplication using Java 17.0.11 with PID 13892 (C:\Users\YASH SHAH\Downloads\crud_demo\crud_demo\target\classes started by YASH SHAH in C:\Users\YASH SHAH\Downloads\crud_demo\crud_demo)
+25-02-10 23:11:22.89 [restartedMain] INFO  c.c.e.crud_demo.CrudDemoApplication -
+				No active profile set, falling back to 1 default profile: "default"
+25-02-10 23:11:23.48 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+				Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+25-02-10 23:11:23.50 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -
+				Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+25-02-10 23:11:23.80 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+				Tomcat initialized with port 8080 (http)
+25-02-10 23:11:23.81 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
+				Initializing ProtocolHandler ["http-nio-8080"]
+25-02-10 23:11:23.81 [restartedMain] INFO  o.a.catalina.core.StandardService -
+				Starting service [Tomcat]
+25-02-10 23:11:23.81 [restartedMain] INFO  o.a.catalina.core.StandardEngine -
+				Starting Servlet engine: [Apache Tomcat/10.1.34]
+25-02-10 23:11:23.85 [restartedMain] INFO  o.a.c.c.C.[Tomcat-2].[localhost].[/] -
+				Initializing Spring embedded WebApplicationContext
+25-02-10 23:11:23.85 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext -
+				Root WebApplicationContext: initialization completed in 954 ms
+25-02-10 23:11:24.17 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper -
+				HHH000204: Processing PersistenceUnitInfo [name: default]
+25-02-10 23:11:24.18 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator -
+				HHH000026: Second-level cache disabled
+25-02-10 23:11:24.20 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo -
+				No LoadTimeWeaver setup: ignoring JPA class transformer
+25-02-10 23:11:24.20 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+				HikariPool-17 - Starting...
+25-02-10 23:11:24.34 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool -
+				HikariPool-17 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6fb7f855
+25-02-10 23:11:24.34 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource -
+				HikariPool-17 - Start completed.
+25-02-10 23:11:24.35 [restartedMain] INFO  o.hibernate.orm.connections.pooling -
+				HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-17)']
+	Database driver: undefined/unknown
+	Database version: 8.0.27
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+25-02-10 23:11:24.43 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator -
+				HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+25-02-10 23:11:24.71 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean -
+				Initialized JPA EntityManagerFactory for persistence unit 'default'
+25-02-10 23:11:24.96 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -
+				spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+25-02-10 23:11:25.95 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -
+				LiveReload server is running on port 35729
+25-02-10 23:11:25.97 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver -
+				Exposing 14 endpoints beneath base path '/admin'
+25-02-10 23:11:26.01 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol -
+				Starting ProtocolHandler ["http-nio-8080"]
+25-02-10 23:11:26.02 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer -
+				Tomcat started on port 8080 (http) with context path '/'
+25-02-10 23:11:26.02 [restartedMain] INFO  c.c.e.crud_demo.CrudDemoApplication -
+				Started CrudDemoApplication in 3.186 seconds (process running for 1934.833)
+25-02-10 23:11:26.03 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -
+				Condition evaluation unchanged
