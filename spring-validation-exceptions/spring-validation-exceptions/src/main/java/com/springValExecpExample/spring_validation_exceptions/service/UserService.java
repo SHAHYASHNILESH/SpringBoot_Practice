@@ -38,4 +38,64 @@ public class UserService {
 
 		return userRepo.save(u);
 	}
+
+	public User updateUser(Integer id, UserRequest userRequest) throws UserNotFoundException {
+
+		User u = userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+		u.setName(userRequest.getName());
+		u.setAddress(userRequest.getAddress());
+		u.setEmail(userRequest.getEmail());
+		u.setAge(userRequest.getAge());
+		u.setSalary(userRequest.getSalary());
+
+		return userRepo.save(u);
+
+	}
+
+	public User updatePartialUser(Integer id, UserRequest userRequest) throws UserNotFoundException {
+
+		User u = userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+		if (userRequest.getName() != null) {
+
+			u.setName(userRequest.getName());
+
+		}
+
+		if (userRequest.getAddress() != null) {
+
+			u.setAddress(userRequest.getAddress());
+
+		}
+
+		if (userRequest.getEmail() != null) {
+
+			u.setEmail(userRequest.getEmail());
+
+		}
+
+		if (userRequest.getAge() != 0) {
+
+			u.setAge(userRequest.getAge());
+
+		}
+
+		if (userRequest.getSalary() != 0) {
+
+			u.setSalary(userRequest.getSalary());
+
+		}
+
+		return userRepo.save(u);
+
+	}
+
+	public void deleteUser(Integer id) throws UserNotFoundException {
+
+		User u = userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+		userRepo.delete(u);
+
+	}
 }
