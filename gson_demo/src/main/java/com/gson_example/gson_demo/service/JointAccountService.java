@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.gson_example.gson_demo.entity.JointAccount;
+import com.gson_example.gson_demo.exception.ResourceNotFoundException;
 import com.gson_example.gson_demo.repository.JointAccountRepository;
 
 @Service
@@ -17,20 +18,21 @@ public class JointAccountService {
 	@Autowired
 	private JointAccountRepository jointAccountRepository;
 
-	public String getJointAccountById(Long leadId) {
+	public String getJointAccountById(Long leadId) throws ResourceNotFoundException {
 
-		Map<String, Object> values = new HashMap<>();
+		// Map<String, Object> values = new HashMap<>();
 		Map<String, Object> nValues = new HashMap<>();
 		Map<String, Object> presentValues = new HashMap<>();
 		Map<String, Object> finalResponse = new HashMap<>();
 
-		JointAccount jointAccById = jointAccountRepository.findById(leadId).get();
+		JointAccount jointAccById = jointAccountRepository.findById(leadId)
+				.orElseThrow(() -> new ResourceNotFoundException("Joint Account Not Found"));
 
-		values.put("leadId", jointAccById.getLeadId());
-		values.put("name", jointAccById.getName());
-		values.put("address", jointAccById.getAddress());
-		values.put("age", jointAccById.getAge());
-		values.put("gender", jointAccById.getGender());
+//		values.put("leadId", jointAccById.getLeadId());
+//		values.put("name", jointAccById.getName());
+//		values.put("address", jointAccById.getAddress());
+//		values.put("age", jointAccById.getAge());
+//		values.put("gender", jointAccById.getGender());
 
 //		presentValues.put("presentValues", values);
 		presentValues.put("presentValues", jointAccById);
@@ -55,7 +57,6 @@ public class JointAccountService {
 		finalResponse.put("nullResponse", nValues);
 
 		Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
-
 		return gson.toJson(finalResponse);
 
 	}

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gson_example.gson_demo.entity.JointAccount;
+import com.gson_example.gson_demo.exception.ResourceNotFoundException;
 import com.gson_example.gson_demo.service.JointAccountService;
 
 @RestController
@@ -19,7 +20,7 @@ public class JointAccountController {
 	private JointAccountService jointAccountService;
 
 	@GetMapping("/joint-account/{leadId}")
-	public String getJointAccountById(@PathVariable Long leadId) {
+	public String getJointAccountById(@PathVariable Long leadId) throws ResourceNotFoundException {
 		return jointAccountService.getJointAccountById(leadId);
 	}
 
