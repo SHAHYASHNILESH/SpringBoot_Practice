@@ -32,7 +32,8 @@ public class JointAccountService {
 		values.put("age", jointAccById.getAge());
 		values.put("gender", jointAccById.getGender());
 
-		presentValues.put("presentValues", values);
+//		presentValues.put("presentValues", values);
+		presentValues.put("presentValues", jointAccById);
 
 		if (jointAccById.getLeadId() == null) {
 			nValues.put("leadId", jointAccById.getLeadId());
