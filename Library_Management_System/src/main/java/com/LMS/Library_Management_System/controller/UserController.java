@@ -30,16 +30,15 @@ public class UserController {
 
 		UserEntity issueBook = userService.issueBook(id, title);
 
-		return new ResponseEntity<>(
-				("Book Issued Successfully! Book to be returned on " + issueBook.getBooks().get(0).getReturnDate()),
-				HttpStatus.OK);
+		return new ResponseEntity<>(("Book Issued Successfully! Book to be returned after one month"), HttpStatus.OK);
 
 	}
 
 	@PutMapping("/return-book/{id}/{bookId}")
-	public ResponseEntity<?> returnBook(@PathVariable Long id,@PathVariable Long bookId) throws ResourceNotFoundException {
+	public ResponseEntity<?> returnBook(@PathVariable Long id, @PathVariable Long bookId)
+			throws ResourceNotFoundException {
 
-		UserEntity issueBook = userService.returnBook(id,bookId);
+		UserEntity issueBook = userService.returnBook(id, bookId);
 
 		return new ResponseEntity<>("Book Returned Successfully!", HttpStatus.OK);
 

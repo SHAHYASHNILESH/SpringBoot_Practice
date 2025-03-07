@@ -65,16 +65,16 @@ public class UserServiceImpl implements UserService {
 
 		bookById.setAvailabilityStatus(true);
 		bookById.setBorrowDate(null);
-		bookById.setReturnDate(null);
+		bookById.setReturnDate(LocalDate.now());
 
-		for (int i = 0; i < user.getBooks().size(); i++) {
-
-			if (user.getBooks().get(i).getBookId() == bookId) {
-
-				user.getBooks().remove(i);
-
-			}
-		}
+//		for (int i = 0; i < user.getBooks().size(); i++) {
+//
+//			if (user.getBooks().get(i).getBookId() == bookId) {
+//
+//				user.getBooks().remove(i);
+//
+//			}
+//		}
 
 		bookRepo.save(bookById);
 
