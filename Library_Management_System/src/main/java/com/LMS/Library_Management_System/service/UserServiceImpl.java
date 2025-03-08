@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService {
 		bookById.setAvailabilityStatus(true);
 		bookById.setBorrowDate(null);
 		bookById.setReturnDate(LocalDate.now());
+		bookById.setUser(null);
 
 //		for (int i = 0; i < user.getBooks().size(); i++) {
 //
