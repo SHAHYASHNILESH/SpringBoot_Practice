@@ -19,6 +19,7 @@ public class WeatherController {
 
     @Autowired
     private WeatherRepository weatherRepository;
+    
     @Autowired
     CacheInspectionService cacheInspectionService;
 
