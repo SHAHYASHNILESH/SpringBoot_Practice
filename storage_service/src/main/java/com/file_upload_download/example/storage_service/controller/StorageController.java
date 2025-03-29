@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.file_upload_download.example.storage_service.entity.FileData;
+import com.file_upload_download.example.storage_service.exception.ResourceNotFoundException;
 import com.file_upload_download.example.storage_service.service.StorageService;
 
 @RestController
@@ -23,15 +24,18 @@ public class StorageController {
 
 	@PostMapping("/storage/upload")
 	public ResponseEntity<?> uploadFile(@RequestParam MultipartFile file) throws IOException {
+		
 		FileData uploadFile = storageService.uploadFile(file);
 		return new ResponseEntity<>(uploadFile, HttpStatus.CREATED);
+		
 	}
 
 	@GetMapping("/storage/download")
-	public ResponseEntity<?> downloadFile(@RequestParam String fileName) throws IOException {
+	public ResponseEntity<?> downloadFile(@RequestParam String fileName) throws IOException, ResourceNotFoundException {
+		
 		FileData downloadFile = storageService.downloadFile(fileName);
-
 		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf(downloadFile.getType()))
 				.body(downloadFile.getData());
+		
 	}
 }
