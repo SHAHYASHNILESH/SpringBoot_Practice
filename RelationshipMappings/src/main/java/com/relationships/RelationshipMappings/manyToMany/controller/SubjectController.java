@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.relationships.RelationshipMappings.manyToMany.entity.Subjects;
+import com.relationships.RelationshipMappings.manyToMany.exception.ResourceNotFoundException;
 import com.relationships.RelationshipMappings.manyToMany.service.SubjectService;
 
 @RestController
@@ -33,7 +34,7 @@ public class SubjectController {
 	}
 
 	@PostMapping("/subjects/{subid}/students/{sid}")
-	public Subjects addSubjectForStudent(@PathVariable Long subid, @PathVariable Long sid) {
+	public Subjects addSubjectForStudent(@PathVariable Long subid, @PathVariable Long sid) throws ResourceNotFoundException {
 
 		return subjectService.addSubjectForStudent(subid, sid);
 

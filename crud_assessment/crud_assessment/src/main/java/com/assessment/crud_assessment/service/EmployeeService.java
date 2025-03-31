@@ -3,6 +3,9 @@ package com.assessment.crud_assessment.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -30,6 +33,7 @@ public class EmployeeService {
 
 	}
 
+	@Cacheable(value = "employees", key = "#id")
 	public Employee getEmployeeById(Long id) throws ResourceNotFoundException {
 
 		return employeeRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee Not Found"));
@@ -41,6 +45,7 @@ public class EmployeeService {
 
 	}
 
+	@CachePut(value = "employees", key = "#id")
 	public Employee updateEmployee(Long id, Employee employee) throws ResourceNotFoundException {
 
 		Employee e = employeeRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee Not Found"));
@@ -53,6 +58,7 @@ public class EmployeeService {
 
 	}
 
+	@CacheEvict(value = "employees", key = "#id")
 	public void deleteEmployee(Long id) throws ResourceNotFoundException {
 
 		Employee e = employeeRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee Not Found"));
