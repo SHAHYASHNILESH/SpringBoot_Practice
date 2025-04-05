@@ -15,8 +15,13 @@ import com.assessment.crud_assessment.entity.Employee;
 import com.assessment.crud_assessment.exception.ResourceNotFoundException;
 import com.assessment.crud_assessment.repository.EmployeeRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class EmployeeService {
+
+//	private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
 	@Autowired
 	private EmployeeRepository employeeRepo;
@@ -40,6 +45,12 @@ public class EmployeeService {
 	}
 
 	public Employee addEmployee(Employee employee) {
+
+		log.info("Adding employee in db");
+		log.warn("Adding employee in db");
+		log.error("Adding employee in db");
+		log.debug("Adding employee in db");
+		log.trace("Adding employee in db");
 
 		return employeeRepo.save(employee);
 
