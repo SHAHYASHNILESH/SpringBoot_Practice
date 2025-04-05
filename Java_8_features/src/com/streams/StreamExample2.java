@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -205,8 +206,9 @@ public class StreamExample2 {
 
 		// Find the first unique character in a string
 		System.out.println("++++++++++++++++++++++");
-		String string4 = "hello";
-		Arrays.stream(string4.split("")).collect(Collectors.groupingBy(s -> s, Collectors.counting())).entrySet()
-				.stream().filter(x -> x.getValue() == 1).findFirst().ifPresent(System.out::println);
+		String string4 = "hello world";
+		Arrays.stream(string4.split(""))
+				.collect(Collectors.groupingBy(s -> s, LinkedHashMap::new, Collectors.counting())).entrySet().stream()
+				.filter(x -> x.getValue() == 1 && !x.getKey().equals(" ")).findFirst().ifPresent(System.out::println);
 	}
 }
