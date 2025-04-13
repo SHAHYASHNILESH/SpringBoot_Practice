@@ -51,7 +51,7 @@ public class EmployeeService {
 		log.error("Adding employee in db");
 		log.debug("Adding employee in db");
 		log.trace("Adding employee in db");
-
+		System.out.println("addEmployee");
 		return employeeRepo.save(employee);
 
 	}
