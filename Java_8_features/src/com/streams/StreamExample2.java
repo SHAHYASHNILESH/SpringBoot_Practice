@@ -210,5 +210,45 @@ public class StreamExample2 {
 		Arrays.stream(string4.split(""))
 				.collect(Collectors.groupingBy(s -> s, LinkedHashMap::new, Collectors.counting())).entrySet().stream()
 				.filter(x -> x.getValue() == 1 && !x.getKey().equals(" ")).findFirst().ifPresent(System.out::println);
+
+		// Flatten the list of lists into a single list of fruits
+		System.out.println("++++++++++++++++++++++");
+		List<List<String>> lstLst = Arrays.asList(Arrays.asList("apple", "banana", "cherry"),
+				Arrays.asList("mango", "apricot", "strawberry"));
+		lstLst.stream().flatMap(List::stream).forEach(System.out::println);
+
+		// Flatten the list and filter fruits starting with 'a'
+		System.out.println("++++++++++++++++++++++");
+		lstLst.stream().flatMap(List::stream).filter(x -> x.startsWith("a")).forEach(System.out::println);
+
+		// Flatten the list and sort the fruits in descending order
+		System.out.println("++++++++++++++++++++++");
+		lstLst.stream().flatMap(List::stream).sorted((a, b) -> b.compareTo(a)).forEach(System.out::println);
+
+		// Get the first 3 elements using limit
+		System.out.println("++++++++++++++++++++++");
+		lst.stream().limit(3).forEach(System.out::println);
+
+		// Skip the first 3 elements using skip
+		System.out.println("++++++++++++++++++++++");
+		lst.stream().skip(3).forEach(System.out::println);
+
+		// Filter even numbers and skip first 2 elements
+		System.out.println("++++++++++++++++++++++");
+		lst.stream().filter(x -> x % 2 == 0).skip(2).forEach(System.out::println);
+
+		// In case of custom objects, we need to override the equals() and hashCode()
+		// methods for getting distinct objects from a list of objects
+
+		// List of distinct employees
+		System.out.println("++++++++++++++++++++++");
+		List<Employee> emps2 = Arrays.asList(new Employee("A", 30), new Employee("B", 40), new Employee("A", 30),
+				new Employee("A", 30));
+		emps2.stream().distinct().forEach(System.out::println);
+
+		// Debugging a stream with the help of peek()
+		System.out.println("++++++++++++++++++++++");
+		lst.stream().peek(x -> System.out.println("Before: " + x)).map(x -> x * 2)
+				.peek(x -> System.out.println("After: " + x)).forEach(System.out::println);
 	}
 }
