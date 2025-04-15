@@ -254,6 +254,7 @@ class PatternPractice {
 
 				System.out.print(x + " ");
 				x = x * (i - j) / j;
+				
 			}
 			System.out.println();
 		}

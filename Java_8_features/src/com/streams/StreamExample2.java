@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -48,6 +49,10 @@ public class StreamExample2 {
 		System.out.println("++++++++++++++++++++++");
 		Set<Integer> tempIntegers = new HashSet<>();
 		lst.stream().filter(x -> !tempIntegers.add(x)).forEach(System.out::println);
+
+		System.out.println("++++++++++++++++++++++");
+		lst.stream().collect(Collectors.groupingBy(s -> s, Collectors.counting())).entrySet().stream()
+				.filter(x -> x.getValue() > 1).forEach(x -> System.out.println(x.getKey()));
 
 		// Given a list of integers, find the maximum and minimum element present in the
 		// list
@@ -191,12 +196,24 @@ public class StreamExample2 {
 		Arrays.stream(string2.split("")).collect(Collectors.groupingBy(s -> s, Collectors.counting()))
 				.forEach((k, v) -> System.out.println(k + " " + v));
 
-		// Sort the map by key
+		// Sort the list of employee objects by key
 		System.out.println("++++++++++++++++++++++");
 		emps.stream()
 				.collect(Collectors.toMap(Employee::getName, Employee::getSalary, (e, r) -> e,
 						() -> new TreeMap<>(Comparator.naturalOrder())))
 				.forEach((k, v) -> System.out.println(k + " " + v));
+		
+		// Sort the map by value
+		Map<String, Integer> unsortedMap = new HashMap<>();
+		unsortedMap.put("banana", 2);
+		unsortedMap.put("apple", 5);
+		unsortedMap.put("orange", 3);
+
+		System.out.println("++++++++++++++++++++++");
+		Map<String, Integer> sortedByKey = unsortedMap.entrySet().stream().sorted(Map.Entry.comparingByValue())
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue,
+						LinkedHashMap::new));
+		System.out.println(sortedByKey);
 
 		// Given a String, find the first non-repeated character in it
 		System.out.println("++++++++++++++++++++++");
@@ -250,5 +267,14 @@ public class StreamExample2 {
 		System.out.println("++++++++++++++++++++++");
 		lst.stream().peek(x -> System.out.println("Before: " + x)).map(x -> x * 2)
 				.peek(x -> System.out.println("After: " + x)).forEach(System.out::println);
+
+		// Given a string, find the frequency of vowels in it using stream api
+		System.out.println("++++++++++++++++++++++");
+		String string5 = "hello world";
+		Map<String, Long> collect = Arrays.stream(string5.toLowerCase().split(""))
+				.filter(x -> x.equals("a") || x.equals("e") || x.equals("i") || x.equals("o") || x.equals("u"))
+				.collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+
+		System.out.println(collect);
 	}
 }
