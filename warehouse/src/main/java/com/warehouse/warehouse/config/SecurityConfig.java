@@ -1,9 +1,8 @@
-package com.ecomm.app.ecommerce.config;
+package com.warehouse.warehouse.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,22 +16,20 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.ecomm.app.ecommerce.filter.JwtAuthFilter;
+import com.warehouse.warehouse.filter.JwtAuthFilter;
 
 @Configuration
 @SuppressWarnings("deprecation")
 public class SecurityConfig {
 
 	@Autowired
-	private UserDetailsService userDetails;
+	private UserDetailsService userDetailsService;
 
 	@Autowired
 	private JwtAuthFilter jwtAuthFilter;
 
 	@Autowired
-	private AuthenticationEntryPoint authEntryPoint;
-
-	private final static String[] WHITE_LIST_URLS = { "/api/public/**"};
+	private AuthenticationEntryPoint authention;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -41,10 +38,10 @@ public class SecurityConfig {
 
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-		authenticationProvider.setPasswordEncoder(passwordEncoder());
-		authenticationProvider.setUserDetailsService(userDetails);
-		return authenticationProvider;
+		DaoAuthenticationProvider doAuthenticationProvider = new DaoAuthenticationProvider();
+		doAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+		doAuthenticationProvider.setUserDetailsService(userDetailsService);
+		return doAuthenticationProvider;
 	}
 
 	@Bean
@@ -55,14 +52,13 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable());
-		http.sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-		http.authorizeHttpRequests(auth -> auth.requestMatchers(WHITE_LIST_URLS).permitAll()
-				.requestMatchers("/api/auth/consumer/**").hasAuthority("CONSUMER")
-				.anyRequest()
-				.authenticated());
-		http.exceptionHandling(ex -> ex.authenticationEntryPoint(authEntryPoint));
-
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/api/public/**").permitAll()
+				.requestMatchers("/product/add").hasAuthority("ADMIN").requestMatchers("/product/get")
+				.hasAuthority("USER").requestMatchers("/product/update/{id}").hasAuthority("ADMIN")
+				.requestMatchers("/product/delete/{id}").hasAuthority("ADMIN").anyRequest().authenticated());
+		http.exceptionHandling(ex -> ex.authenticationEntryPoint(authention));
 		return http.build();
 	}
 }

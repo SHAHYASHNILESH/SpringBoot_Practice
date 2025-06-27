@@ -32,16 +32,16 @@ public class DataLoader implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		// ---------------------- USERS ----------------------
-		UserInfo buyer1 = new UserInfo(null, "alice", "password", "CONSUMER");
-		UserInfo buyer2 = new UserInfo(null, "bob", "password", "CONSUMER");
+		UserInfo buyer1 = new UserInfo(null, "jack", "pass_word", "CONSUMER");
+		UserInfo buyer2 = new UserInfo(null, "bob", "pass_word", "CONSUMER");
 
-		UserInfo seller1 = new UserInfo(null, "techstore", "password", "SELLER");
-		UserInfo seller2 = new UserInfo(null, "fashionhub", "password", "SELLER");
+		UserInfo seller1 = new UserInfo(null, "alice", "pass_word", "SELLER");
+		UserInfo seller2 = new UserInfo(null, "fashionhub", "pass_word", "SELLER");
 
 		userInfoRepository.saveAll(List.of(buyer1, buyer2, seller1, seller2));
 
 		// ---------------------- CATEGORIES ----------------------
-		Category electronics = new Category(null, "Electronics");
+		Category electronics = new Category(null, "Smartphone");
 		Category fashion = new Category(null, "Fashion");
 		Category home = new Category(null, "Home & Kitchen");
 
