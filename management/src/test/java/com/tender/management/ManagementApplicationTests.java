@@ -1,10 +1,10 @@
-package com.warehouse.warehouse;
+package com.tender.management;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WarehouseApplicationTests {
+class ManagementApplicationTests {
 
 	@Test
 	void contextLoads() {

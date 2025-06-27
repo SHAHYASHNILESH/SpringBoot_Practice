@@ -8,11 +8,11 @@
 		<version>3.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.warehouse</groupId>
-	<artifactId>warehouse</artifactId>
+	<groupId>com.tender</groupId>
+	<artifactId>management</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>warehouse</name>
-	<description>Warehouse project for Spring Boot</description>
+	<name>management</name>
+	<description>Tender Management project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -58,6 +58,12 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<!-- Add JWT Dependency -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.12.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
