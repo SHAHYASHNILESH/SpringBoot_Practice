@@ -16,7 +16,8 @@ public class PaymentService {
 	}
 
 	public void makePayment(String name) {
-		// Runtime Polymorphism -> at runtime, pay() method of specific payment method is called
+		// Runtime Polymorphism -> at runtime, pay() method of specific payment method
+		// is called
 		System.out.println(paymentMethods.get(name));
 		paymentMethods.get(name).pay();
 	}
