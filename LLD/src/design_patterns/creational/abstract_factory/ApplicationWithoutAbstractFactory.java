@@ -32,6 +32,7 @@ public class ApplicationWithoutAbstractFactory {
 		// Windows UI
 		WindowsButton1 button = new WindowsButton1();
 		WindowsScrollBar1 scrollBar = new WindowsScrollBar1();
+
 		// Mac UI
 		button.render();
 		scrollBar.render();
