@@ -69,11 +69,11 @@ class MacOSFactory implements UIFactory {
 	}
 }
 
-public class Application {
+public class ApplicationWithAbstractFactory {
 	private Button button;
 	private ScrollBar scrollBar;
 
-	public Application(UIFactory factory) {
+	public ApplicationWithAbstractFactory(UIFactory factory) {
 		this.button = factory.createButton();
 		this.scrollBar = factory.createScrollBar();
 	}
@@ -86,7 +86,12 @@ public class Application {
 	public static void main(String[] args) {
 		// Use Windows UI
 		UIFactory windowsFactory = new WindowsFactory();
-		Application app = new Application(windowsFactory);
+		ApplicationWithAbstractFactory app = new ApplicationWithAbstractFactory(windowsFactory);
+		app.renderUI();
+
+		// Use Mac OS UI
+		UIFactory macOsFactory = new MacOSFactory();
+		app = new ApplicationWithAbstractFactory(macOsFactory);
 		app.renderUI();
 	}
 }
