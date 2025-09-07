@@ -1,4 +1,4 @@
-package design_patterns.structural;
+package design_patterns.structural.adapter;
 
 public class SendGridService {
     public void sendEmail(String recipient, String title, String content){

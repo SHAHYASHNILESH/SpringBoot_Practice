@@ -1,4 +1,6 @@
-package design_patterns.structural;
+package design_patterns.structural.adapter;
+
+import design_patterns.structural.adapter.NotificationService;
 
 //Legacy Code: Email Notification Service
 public class EmailNotificationService implements NotificationService {

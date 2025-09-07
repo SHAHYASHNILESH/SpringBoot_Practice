@@ -1,4 +1,4 @@
-package design_patterns.structural.weather_app_svc;
+package design_patterns.structural.adapter.weather_app_svc;
 
 import java.util.Scanner;
 

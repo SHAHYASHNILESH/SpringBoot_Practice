@@ -1,6 +1,6 @@
-package design_patterns.structural;
+package design_patterns.structural.adapter;
 
-public class SendGridAdapter implements NotificationService{
+public class SendGridAdapter implements NotificationService {
     private SendGridService sendGridService;
 
     public SendGridAdapter(SendGridService sendGridService){

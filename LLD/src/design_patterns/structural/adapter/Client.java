@@ -1,4 +1,4 @@
-package design_patterns.structural;
+package design_patterns.structural.adapter;
 
 public class Client {
     public static void main(String[] args) {
