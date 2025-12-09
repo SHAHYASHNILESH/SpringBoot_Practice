@@ -28,19 +28,25 @@ public class AppRunner implements ApplicationRunner {
         Role saveRole2 = roleRepository.save(role2);
 
         UserInfo user1 = new UserInfo();
-        user1.setEmail("bidder@gmail.com");
-        user1.setPassword("1234");
+        user1.setUsername("bidder1");
+        user1.setCompanyName("companyOne");
+        user1.setEmail("bidderemail@gmail.com");
+        user1.setPassword("bidder123$");
         user1.setRole(saveRole1);
 
         UserInfo user2 = new UserInfo();
-        user2.setEmail("approver@gmail.com");
-        user2.setPassword("1234");
+        user2.setUsername("approver");
+        user2.setCompanyName("defaultCompany");
+        user2.setEmail("approveremail@gmail.com");
+        user2.setPassword("approver123$");
         user2.setRole(saveRole2);
 
         UserInfo user3 = new UserInfo();
-        user3.setEmail("yash@gmail.com");
-        user3.setPassword("1234");
-        user3.setRole(saveRole2);
+        user3.setUsername("bidder2");
+        user3.setCompanyName("companyTwo");
+        user3.setEmail("bidderemail2@gmail.com");
+        user3.setPassword("bidder789$");
+        user3.setRole(saveRole1);
 
         userRepository.save(user1);
         userRepository.save(user2);

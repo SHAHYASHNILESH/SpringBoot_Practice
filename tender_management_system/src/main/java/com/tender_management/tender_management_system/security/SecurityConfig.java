@@ -23,7 +23,7 @@ public class SecurityConfig {
     @Autowired
     private AuthenticationProvider authenticationProvider;
 
-    public final static String[] WHITE_LIST_URLS = {"/login"};
+    public final static String[] WHITE_LIST_URLS = {"/login","/bidding/list"};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -31,7 +31,7 @@ public class SecurityConfig {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         http.authenticationProvider(authenticationProvider);
-        http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers(WHITE_LIST_URLS).permitAll().anyRequest().authenticated());
+        http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers(WHITE_LIST_URLS).permitAll().requestMatchers("/bidding/add").hasAuthority("BIDDER").requestMatchers("/bidding/update/*").hasAuthority("APPROVER").anyRequest().authenticated());
         http.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(authEntryPoint));
         return http.build();
     }
