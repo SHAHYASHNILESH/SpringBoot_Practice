@@ -26,4 +26,9 @@ public class BiddingController {
     public ResponseEntity<?> updateBiddingStatus(@RequestHeader("Authorization") String header,@PathVariable Long id,@RequestBody BiddingModel biddingModel){
         return biddingService.updateBiddingStatus(header,id,biddingModel);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteBid(@RequestHeader("Authorization") String header,@PathVariable Long id){
+        return biddingService.deleteBid(header,id);
+    }
 }

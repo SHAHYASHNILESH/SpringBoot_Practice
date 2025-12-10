@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +42,7 @@ public class BiddingService {
             }
 
             biddingModel.setBidderId(userInfo.getId().intValue());
-            biddingModel.setDateOfBidding(String.valueOf(LocalDate.now()));
+            biddingModel.setDateOfBidding(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
             BiddingModel savedBidding = biddingRepository.save(biddingModel);
 
             return ResponseEntity.status(201).body(savedBidding);
@@ -94,6 +96,35 @@ public class BiddingService {
             BiddingModel savedBid = biddingRepository.save(model);
 
             return ResponseEntity.status(200).body(savedBid);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).build();
+        }
+    }
+
+    public ResponseEntity<?> deleteBid(String header, Long id) {
+        try {
+            String token = header.substring(7);
+            String username = jwtUtils.extractUsername(token);
+
+            Optional<UserInfo> optionalUserInfo = userRepository.findByEmail(username);
+            if (!optionalUserInfo.isPresent()) {
+                return ResponseEntity.status(400).build();
+            }
+
+            UserInfo userInfo = optionalUserInfo.get();
+
+            Optional<BiddingModel> optionalBiddingModel = biddingRepository.findById(id);
+            if (!optionalBiddingModel.isPresent()) {
+                return ResponseEntity.status(400).body("not found");
+            }
+
+            BiddingModel biddingModel = optionalBiddingModel.get();
+            if (userInfo.getId() != biddingModel.getBidderId() && !userInfo.getRole().getRoleName().equalsIgnoreCase("APPROVER")) {
+                return ResponseEntity.status(403).body("Forbidden!");
+            }
+
+            biddingRepository.deleteById(id);
+            return ResponseEntity.status(204).body("deleted successfully");
         } catch (Exception e) {
             return ResponseEntity.status(400).build();
         }
