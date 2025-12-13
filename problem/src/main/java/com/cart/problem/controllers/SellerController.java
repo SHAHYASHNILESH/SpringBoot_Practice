@@ -116,7 +116,7 @@ public class SellerController {
                 return ResponseEntity.status(400).build();
             }
 
-            return ResponseEntity.status(201).body(bySeller);
+            return ResponseEntity.status(200).body(bySeller);
         } catch (Exception e) {
             return ResponseEntity.status(400).build();
         }
