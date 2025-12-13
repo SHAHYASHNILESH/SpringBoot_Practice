@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 public class UserInfoUserDetails implements UserDetails {
     private UserInfo userInfo;
 
-    public UserInfo getUserInfo(){
+    public UserInfo getUserInfo() {
         return userInfo;
     }
 
@@ -21,10 +21,10 @@ public class UserInfoUserDetails implements UserDetails {
     private String password;
     private List<GrantedAuthority> authorities;
 
-    public UserInfoUserDetails(UserInfo userInfo){
-        this.name=userInfo.getUsername();
-        this.password=userInfo.getPassword();
-        this.authorities= Stream.of(userInfo.getRoles()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    public UserInfoUserDetails(UserInfo userInfo) {
+        this.name = userInfo.getUsername();
+        this.password = userInfo.getPassword();
+        this.authorities = Stream.of(userInfo.getRoles()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override
