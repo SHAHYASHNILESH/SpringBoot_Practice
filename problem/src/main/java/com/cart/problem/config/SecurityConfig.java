@@ -35,7 +35,7 @@ public class SecurityConfig {
         http.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         http.authenticationProvider(authenticationProvider());
-        http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers("/api/public/**").permitAll().requestMatchers("/api/auth/consumer/**").hasAuthority("CONSUMER").anyRequest().authenticated());
+        http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers("/api/public/**").permitAll().requestMatchers("/api/auth/consumer/**").hasAuthority("CONSUMER").requestMatchers("/api/auth/seller/**").hasAuthority("SELLER").anyRequest().authenticated());
         http.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(authEntryPoint));
         return http.build();
     }
