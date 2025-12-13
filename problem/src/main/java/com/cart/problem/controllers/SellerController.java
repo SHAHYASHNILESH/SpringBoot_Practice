@@ -121,4 +121,74 @@ public class SellerController {
             return ResponseEntity.status(400).build();
         }
     }
+
+    @PutMapping("/product")
+    public ResponseEntity<?> updateProduct(@RequestHeader("Authorization") String header, @RequestBody Product product) {
+        try {
+            String token = header.substring(7);
+            String username = jwtService.extractUsername(token);
+
+            Optional<UserInfo> optionalUserInfo = userRepository.findByUsername(username);
+            if (!optionalUserInfo.isPresent()) {
+                return ResponseEntity.status(400).build();
+            }
+            UserInfo userInfo = optionalUserInfo.get();
+
+            if (!userInfo.getRoles().equalsIgnoreCase("SELLER")) {
+                return ResponseEntity.status(403).body("Forbidden!!");
+            }
+
+            Optional<Category> byCategoryName = categoryRepository.findByCategoryName(product.getCategory().getCategoryName());
+            if (!byCategoryName.isPresent()) {
+                return ResponseEntity.status(400).build();
+            }
+            Category cat = byCategoryName.get();
+
+            Optional<Product> optionalProduct = productRepository.findById(product.getProductId());
+            if (!optionalProduct.isPresent()) {
+                return ResponseEntity.status(400).build();
+            }
+
+            Product product1 = optionalProduct.get();
+            product1.setProductName(product.getProductName());
+            product1.setPrice(product.getPrice());
+            product1.setCategory(cat);
+
+            categoryRepository.save(cat);
+            Product prod1 = productRepository.save(product1);
+
+            return ResponseEntity.status(200).body(prod1);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).build();
+        }
+    }
+
+    @DeleteMapping("/product/{productId}")
+    public ResponseEntity<?> deleteProduct(@RequestHeader("Authorization") String header, @PathVariable Long productId) {
+        try {
+            String token = header.substring(7);
+            String username = jwtService.extractUsername(token);
+
+            Optional<UserInfo> optionalUserInfo = userRepository.findByUsername(username);
+            if (!optionalUserInfo.isPresent()) {
+                return ResponseEntity.status(400).build();
+            }
+            UserInfo userInfo = optionalUserInfo.get();
+
+            if (!userInfo.getRoles().equalsIgnoreCase("SELLER")) {
+                return ResponseEntity.status(403).body("Forbidden!!");
+            }
+
+            Optional<Product> byProductIdAndSellerUserId = productRepository.findByProductIdAndSellerUserId(productId, userInfo.getUserId());
+            if (!byProductIdAndSellerUserId.isPresent()) {
+                return ResponseEntity.status(404).build();
+            }
+
+            Product product = byProductIdAndSellerUserId.get();
+            productRepository.delete(product);
+            return ResponseEntity.status(200).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(400).build();
+        }
+    }
 }
